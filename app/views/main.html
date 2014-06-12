@@ -8,15 +8,25 @@
 
 </div>
 
-<div>
-    <ul ng-repeat="person in people">
-        <li>{{ person }}</li>
-    </ul>
-    <input type="text" ng-model="newPerson"/>
-    <button type="submit" ng-click="addPerson()" class="btn">Add New Person</button>
+<div>User: {{ userId }}</div>
 
+<div>
+    <h3>Missing</h3>
+    <ul ng-repeat="missing in userMissings">
+        <li>{{ missing }}</li>
+    </ul>
+    <input type="text" ng-model="newMissing"/>
+    <button type="submit" ng-click="addMissing()" class="btn">Add New Missing Sticker</button>
 </div>
 
+<div>
+    <h3>Swaps</h3>
+    <ul ng-repeat="swap in userSwaps">
+        <li>{{ swap }}</li>
+    </ul>
+    <input type="text" ng-model="newSwap"/>
+    <button type="submit" ng-click="addSwap()" class="btn">Add New Swap Sticker</button>
+</div>
 
 <div class="row marketing">
     <h4>HTML5 Boilerplate</h4>
@@ -26,15 +36,6 @@
         sites.
     </p>
 
-    <h4>Angular</h4>
-
-    <p>
-        AngularJS is a toolset for building the framework most suited to your application development.
-    </p>
-
-    <h4>Karma</h4>
-
-    <p>Spectacular Test Runner for JavaScript.</p>
 </div>
 <p>
 <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>

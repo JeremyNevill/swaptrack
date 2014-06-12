@@ -10,22 +10,26 @@
 angular.module('badgerApp')
     .controller('MainCtrl', function ($scope, $firebase) {
 
-        var peopleRef = new Firebase("https://badger.firebaseio.com/people");
-        $scope.people = $firebase(peopleRef);
+        $scope.userId = "112233";
 
+        var userBaseUrl = "https://badger.firebaseio.com/users/" + $scope.userId;
+        var userBase = new Firebase(userBaseUrl);
+        var userMissingsBase = new Firebase(userBaseUrl + '/missings');
+        var userSwapsBase = new Firebase(userBaseUrl + '/swaps');
 
-        $scope.people = $firebase(peopleRef);
-        $scope.addPerson = function () {
-            $scope.people.$add($scope.newPerson);
-            $scope.newPerson = "";
+        $scope.user = $firebase(userBase);
+        $scope.userMissings = $firebase(userMissingsBase);
+        $scope.userSwaps = $firebase(userSwapsBase);
+
+        $scope.addMissing = function () {
+            $scope.userMissings.$add($scope.newMissing);
+            $scope.newMissing = "";
         }
 
-
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+        $scope.addSwap = function () {
+            $scope.userSwaps.$add($scope.newSwap);
+            $scope.newSwap = "";
+        }
 
 
     });
