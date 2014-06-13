@@ -19,17 +19,53 @@ angular.module('badgerApp')
 
         $scope.user = $firebase(userBase);
         $scope.userMissings = $firebase(userMissingsBase);
-        $scope.userSwaps = $firebase(userSwapsBase);
+        $scope.userSwaps = [];//$firebase(userSwapsBase);
+        $scope.otherSwaps = [];
 
         $scope.addMissing = function () {
             $scope.userMissings.$add($scope.newMissing);
+            //$scope.userMissings.push({"name": $scope.newMissing});
+
+            
+
+
             $scope.newMissing = "";
         }
 
         $scope.addSwap = function () {
-            $scope.userSwaps.$add($scope.newSwap);
+            //$scope.userSwaps.$add($scope.newSwap);
+            $scope.userSwaps.push({"name": $scope.newSwap});
             $scope.newSwap = "";
         }
 
+        $scope.addOtherSwap = function () {
+            $scope.otherSwaps.push({"name": $scope.newOtherSwap});
+            $scope.newOtherSwap = "";
+        }
+
+
+//        $scope.deleteMissing = function (e) {
+//            $scope.userMissings.splice(index, 1);
+//       };
+
+        $scope.deleteMissing = function (id) {
+            $scope.userMissings.$remove(id);
+        };
+
+        $scope.deleteSwap = function (index) {
+            $scope.userSwaps.splice(index, 1);
+        };
+
+        $scope.clearMissings = function () {
+            $scope.userMissings = [];
+        };
+
+        $scope.clearSwaps = function () {
+            $scope.userSwaps = [];
+        };
+
+        $scope.clearOtherSwaps = function () {
+            $scope.otherSwaps = [];
+        };
 
     });

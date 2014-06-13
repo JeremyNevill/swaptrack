@@ -1,42 +1,60 @@
-<div class="jumbotron">
-    <h1>Codename Badger</h1>
+<div class="row">
+    <div class="col-md-8">
+        <h2>Mine</h2>
 
-    <p class="lead">
-        Realtime sticker swaps.
-    </p>
+        <div>
+            <h3>Missing</h3>
+            <ul ng-repeat="(id, missing) in userMissings">
+                <li>
+                    {{ missing }}
+                    {{ id }}
+                    <button ng-click="deleteMissing(id)"
+                            class="btn btn-default btn-xs">del
+                    </button>
+                </li>
+            </ul>
+            <div>
+                <input type="text" ng-model="newMissing"/>
+                <button type="submit" ng-click="addMissing()" class="btn">Add New Missing Sticker</button>
+            </div>
+            <div>
+                <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
+            </div>
+        </div>
 
-
+        <div>
+            <h3>Swaps</h3>
+            <ul ng-repeat="swap in userSwaps">
+                <li>{{ swap.name }}
+                    <button ng-click="deleteSwap($index)"
+                            class="btn btn-default btn-xs">del
+                    </button>
+                </li>
+            </ul>
+            <input type="text" ng-model="newSwap"/>
+            <button type="submit" ng-click="addSwap()" class="btn">Add New Swap Sticker</button>
+            <div>
+                <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h2>Theirs</h2>
+        <div>
+            <h3>Swaps</h3>
+            <ul ng-repeat="oswap in otherSwaps">
+                <li>{{ oswap.name }}
+                    <button ng-click="deleteOtherSwap($index)"
+                            class="btn btn-default btn-xs">del
+                    </button>
+                </li>
+            </ul>
+            <input type="text" ng-model="newOtherSwap"/>
+            <button type="submit" ng-click="addOtherSwap()" class="btn">Add New Swap Sticker</button>
+            <div>
+                <button type="submit" ng-click="clearOtherSwaps()" class="btn">Clear</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>User: {{ userId }}</div>
-
-<div>
-    <h3>Missing</h3>
-    <ul ng-repeat="missing in userMissings">
-        <li>{{ missing }}</li>
-    </ul>
-    <input type="text" ng-model="newMissing"/>
-    <button type="submit" ng-click="addMissing()" class="btn">Add New Missing Sticker</button>
-</div>
-
-<div>
-    <h3>Swaps</h3>
-    <ul ng-repeat="swap in userSwaps">
-        <li>{{ swap }}</li>
-    </ul>
-    <input type="text" ng-model="newSwap"/>
-    <button type="submit" ng-click="addSwap()" class="btn">Add New Swap Sticker</button>
-</div>
-
-<div class="row marketing">
-    <h4>HTML5 Boilerplate</h4>
-
-    <p>
-        HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or
-        sites.
-    </p>
-
-</div>
-<p>
-<p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</p>
