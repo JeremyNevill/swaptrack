@@ -1,60 +1,117 @@
 <div class="row">
-    <div class="col-md-8">
-        <h2>Mine</h2>
+    <div class="col-md-12">
 
-        <div>
-            <h3>Missing</h3>
-            <ul ng-repeat="(id, missing) in userMissings">
-                <li>
-                    {{ missing }}
-                    {{ id }}
-                    <button ng-click="deleteMissing(id)"
-                            class="btn btn-default btn-xs">del
-                    </button>
-                </li>
-            </ul>
-            <div>
-                <input type="text" ng-model="newMissing"/>
-                <button type="submit" ng-click="addMissing()" class="btn">Add New Missing Sticker</button>
-            </div>
-            <div>
-                <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
+        <h2>{{ userId }}</h2>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+
+        <h3>Missing</h3>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <p>Sticker Number:
+                    <input type="text" ng-model="newMissing"/>
+                </p>
+
+                <p>
+                    <button type="submit" ng-click="addMissing()" class="btn">Add Missing Sticker</button>
+                </p>
+                <p>
+                    <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
+                </p>
+                <p>
+        <span ng-repeat="(id, missing) in userMissings">
+            {{ missing }}
+            <button ng-click="deleteMissing(id)" class="btn btn-default btn-xs">-</button>
+            &nbsp;
+        </span>
+                </p>
             </div>
         </div>
 
-        <div>
-            <h3>Swaps</h3>
-            <ul ng-repeat="swap in userSwaps">
-                <li>{{ swap.name }}
+    </div>
+    <div class="col-md-6">
+        <h3>Swaps</h3>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <p>Sticker Number:
+                    <input type="text" ng-model="newSwap"/>
+                </p>
+
+                <p>
+                    <button type="submit" ng-click="addSwap()" class="btn">Add Swap Sticker</button>
+                </p>
+                <p>
+                    <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
+                </p>
+                <p>
+                <span ng-repeat="swap in userSwaps">
+                {{ swap }}
                     <button ng-click="deleteSwap($index)"
-                            class="btn btn-default btn-xs">del
+                            class="btn btn-default btn-xs">-
                     </button>
-                </li>
-            </ul>
-            <input type="text" ng-model="newSwap"/>
-            <button type="submit" ng-click="addSwap()" class="btn">Add New Swap Sticker</button>
-            <div>
-                <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
+                &nbsp;
+                </span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <h3>Theirs</h3>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    Swapper Id: <input type="text" ng-model="otherUserId"/>
+                </p>
+
+                <p>
+                    <button ng-click="getOtherData()" class="btn">Get Other User</button>
+                </p>
+
+                <p>
+                    <button ng-click="matchSwaps()" class="btn">Match Swaps</button>
+                </p>
+
+                <p>
+                    Stickers:<br/>
+                <span ng-repeat="oswap in otherSwaps">
+                 {{ oswap }}
+
+                &nbsp;
+                </span>
+                </p>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <h2>Theirs</h2>
-        <div>
-            <h3>Swaps</h3>
-            <ul ng-repeat="oswap in otherSwaps">
-                <li>{{ oswap.name }}
-                    <button ng-click="deleteOtherSwap($index)"
-                            class="btn btn-default btn-xs">del
-                    </button>
-                </li>
-            </ul>
-            <input type="text" ng-model="newOtherSwap"/>
-            <button type="submit" ng-click="addOtherSwap()" class="btn">Add New Swap Sticker</button>
-            <div>
-                <button type="submit" ng-click="clearOtherSwaps()" class="btn">Clear</button>
+
+    <div class="col-md-6">
+        <h3>Matches</h3>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+
+                <p>
+                    Stickers:<br/>
+
+                </p>
             </div>
         </div>
     </div>
+</div>
+
+
 </div>
 
