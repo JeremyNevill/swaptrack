@@ -1,7 +1,12 @@
 <div class="row">
     <div class="col-md-12">
 
-        <h2>{{ userId }}</h2>
+        <button ng-click="AnonLogin()" class="btn btn-default btn-xs">Anon Login</button>
+        <button ng-click="FacebookLogin()" class="btn btn-default btn-xs">Facebook Login</button>
+        <button ng-click="Logout()" class="btn btn-default btn-xs">Logout</button>
+
+        <h2>{{ userDisplayName }}</h2>
+        {{ userId }}
 
     </div>
 </div>
@@ -20,12 +25,14 @@
                 <p>
                     <button type="submit" ng-click="addMissing()" class="btn">Add Missing Sticker</button>
                 </p>
+                <!--
                 <p>
                     <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
                 </p>
+                -->
                 <p>
         <span ng-repeat="(id, missing) in userMissings">
-            {{ missing }}
+            <button type="button" class="btn btn-primary btn-xs">{{ missing }}</button>
             <button ng-click="deleteMissing(id)" class="btn btn-default btn-xs">-</button>
             &nbsp;
         </span>
@@ -47,12 +54,14 @@
                 <p>
                     <button type="submit" ng-click="addSwap()" class="btn">Add Swap Sticker</button>
                 </p>
+                <!--
                 <p>
                     <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
                 </p>
+                -->
                 <p>
                 <span ng-repeat="swap in userSwaps">
-                {{ swap }}
+               <button type="button" class="btn btn-primary btn-xs">{{ swap }}</button>
                     <button ng-click="deleteSwap($index)"
                             class="btn btn-default btn-xs">-
                     </button>
@@ -87,7 +96,7 @@
                 <p>
                     Stickers:<br/>
                 <span ng-repeat="oswap in otherSwaps">
-                 {{ oswap }}
+                 <button type="button" class="btn btn-primary btn-xs">{{ oswap }}</button>
 
                 &nbsp;
                 </span>
@@ -101,17 +110,14 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
-
-
                 <p>
-                    Stickers:<br/>
-
+                <span ng-repeat="matchItem in matches">
+                <button type="button" class="btn btn-success">{{ matchItem }}</button>
+                &nbsp;
+                </span>
                 </p>
             </div>
         </div>
     </div>
-</div>
-
-
 </div>
 

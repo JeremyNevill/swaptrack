@@ -11,18 +11,31 @@ angular.module('badgerApp')
     .controller('MainCtrl', function ($scope, $firebase) {
 
         var baseRef = new Firebase('https://badger.firebaseio.com');
+
         var auth = new FirebaseSimpleLogin(baseRef, function (error, user) {
-            $scope.userId = user.uid;
+            if (error) {
+                // an error occurred while attempting login
+                console.log(error);
+            } else if (user) {
+                // user authenticated with Firebase
+                console.log('User ID: ' + user.uid + ', Provider: ' + user.provider);
+                $scope.userId = user.uid;
 
-            userBaseUrl = "https://badger.firebaseio.com/users/" + $scope.userId;
-            userBase = new Firebase(userBaseUrl);
-            userMissingsBase = new Firebase(userBaseUrl + '/missings');
-            userSwapsBase = new Firebase(userBaseUrl + '/swaps');
+                userBaseUrl = "https://badger.firebaseio.com/users/" + $scope.userId;
+                userBase = new Firebase(userBaseUrl);
+                userMissingsBase = new Firebase(userBaseUrl + '/missings');
+                userSwapsBase = new Firebase(userBaseUrl + '/swaps');
 
-            $scope.user = $firebase(userBase);
-            $scope.userMissings = $firebase(userMissingsBase);
-            $scope.userSwaps = $firebase(userSwapsBase);
+                $scope.user = $firebase(userBase);
+                $scope.userMissings = $firebase(userMissingsBase);
+                $scope.userSwaps = $firebase(userSwapsBase);
+                $scope.userDisplayName = user.displayName;
+
+            } else {
+                // user is logged out
+            }
         });
+
 
         $scope.userId = '';
 
@@ -37,36 +50,69 @@ angular.module('badgerApp')
         $scope.userMissings = [];
         $scope.userSwaps = [];
         $scope.otherSwaps = [];
-        $scope.matches=[];
+        $scope.matches = [];
 
 
         // Anon Login
+        $scope.AnonLogin = function () {
+            auth.login('anonymous', {
+                rememberMe: true
+            });
+        };
 
-        auth.login('anonymous', {
-            rememberMe: true
-        });
+        $scope.FacebookLogin = function () {
+            auth.login('facebook', {
+                rememberMe: true
+            });
+        };
 
+        $scope.Logout = function () {
+            auth.logout();
+        };
 
         // Missings
-
         $scope.addMissing = function () {
             $scope.userMissings.$add($scope.newMissing);
-            //$scope.userMissings.push({"name": $scope.newMissing});
             $scope.newMissing = "";
-
+            $scope.matchSwaps();
         }
 
         $scope.deleteMissing = function (id) {
             $scope.userMissings.$remove(id);
+            $scope.matchSwaps();
+
         };
 
         $scope.clearMissings = function () {
             $scope.userMissings = [];
+            $scope.matchSwaps();
+        };
+
+
+        /// Other Swaps - pull from other user's id
+        $scope.getOtherData = function () {
+            otherUserBaseUrl = baseRef + "/users/" + $scope.otherUserId + '/swaps';
+            var otherUserBase = new Firebase(otherUserBaseUrl);
+            $scope.otherSwaps = $firebase(otherUserBase);
+        };
+
+        // Match swaps with other user
+        $scope.matchSwaps = function () {
+
+            $scope.matches = [];
+            $scope.userMissings.$getIndex().forEach(function (key, i) {
+                $scope.otherSwaps.$getIndex().forEach(function (swapKey, j) {
+                    if ($scope.userMissings[key] === $scope.otherSwaps[swapKey]) {
+                        var match = ($scope.otherSwaps[swapKey]);
+                        $scope.matches.push(match);
+                    }
+                });
+            });
+
         };
 
 
         // Swaps
-
         $scope.addSwap = function () {
             $scope.userSwaps.$add($scope.newSwap);
             $scope.newSwap = "";
@@ -78,56 +124,5 @@ angular.module('badgerApp')
 
         $scope.clearSwaps = function () {
             $scope.userSwaps = [];
-        };
-
-
-        /// Other Swaps - pull from other user's id
-
-        $scope.getOtherData = function () {
-
-            $scope.otherSwaps = ['Loading...'];
-
-            otherUserBaseUrl = "https://badger.firebaseio.com/users/" + $scope.otherUserId + '/swaps';
-            var otherUserBase = new Firebase(otherUserBaseUrl);
-            console.log(otherUserBaseUrl);
-            $scope.otherSwaps = $firebase(otherUserBase);
-
-        };
-
-
-
-        $scope.$watch('otherSwaps', function() {
-
-            var keys = $scope.otherSwaps.$getIndex();
-            console.log("count: " + keys.length);
-
-
-
-        });
-
-
-
-        $scope.matchSwaps = function () {
-
-            var uM = $scope.userMissings.$getIndex();
-            var oS = $scope.otherSwaps.$getIndex();
-
-            var i = 0;
-            var j = 0;
-
-            for (i = 0; i < uM.length; i++) {
-
-                for (j = 0; j < oS.length; j++) {
-
-                    if ($scope.userMissings[i] === $scope.otherSwaps[j]) {
-
-                         $scope.matches.push($scope.userMissings[i]);
-                        alert("Match:" + $scope.userMissings[i]);
-
-                    }
-                }
-            }
-
-
         };
     });
