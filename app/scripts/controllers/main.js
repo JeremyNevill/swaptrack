@@ -13,6 +13,24 @@ angular.module('badgerApp')
 
         var baseRef = new Firebase('https://badger.firebaseio.com');
 
+
+        $scope.userId = '';
+        $scope.isLoggedIn = false;
+
+        var userBaseUrl = "https://badger.firebaseio.com/users/" + $scope.userId;
+        var otherUserBaseUrl = "";
+
+        var userBase = new Firebase(userBaseUrl);
+        var userMissingsBase = new Firebase(userBaseUrl + '/missings');
+        var userSwapsBase = new Firebase(userBaseUrl + '/swaps');
+
+        $scope.user = [];
+        $scope.userMissings = [];
+        $scope.userSwaps = [];
+        $scope.otherSwaps = [];
+        $scope.matches = [];
+
+
         var auth = new FirebaseSimpleLogin(baseRef, function (error, user) {
             if (error) {
                 // an error occurred while attempting login
@@ -32,38 +50,12 @@ angular.module('badgerApp')
                 $scope.userSwaps = $firebase(userSwapsBase);
                 $scope.userDisplayName = user.displayName;
 
+                $scope.isLoggedIn = true;
             } else {
                 // user is logged out
             }
         });
 
-
-        $scope.userId = '';
-
-        var userBaseUrl = "https://badger.firebaseio.com/users/" + $scope.userId;
-        var otherUserBaseUrl = "";
-
-        var userBase = new Firebase(userBaseUrl);
-        var userMissingsBase = new Firebase(userBaseUrl + '/missings');
-        var userSwapsBase = new Firebase(userBaseUrl + '/swaps');
-
-        $scope.user = [];
-        $scope.userMissings = [];
-        $scope.userSwaps = [];
-        $scope.otherSwaps = [];
-        $scope.matches = [];
-
-
-        // Anon Login
-        /*
-        $scope.AnonLogin = function () {
-            auth.login('anonymous', {
-                rememberMe: true
-            }); 
-        };
-        */
-
-      
         $scope.FacebookLogin = function () {
             auth.login('facebook', {
                 rememberMe: true
@@ -72,13 +64,20 @@ angular.module('badgerApp')
 
         $scope.Logout = function () {
             auth.logout();
+            $scope.userId = '';
         };
 
+
         // Missings
-        $scope.addMissing = function () {                               
-            $scope.userMissings.$add($scope.newMissing);
+        $scope.addMissing = function () {
+            var newMissingsSplit = $scope.newMissing.split(",");
+            for (var m in newMissingsSplit) {
+                if (newMissingsSplit[m].length > 0) {
+                    $scope.userMissings.$add(newMissingsSplit[m]);
+                }
+            }
             $scope.newMissing = "";
-            $scope.matchSwaps();
+            //$scope.matchSwaps();
         }
 
         $scope.deleteMissing = function (id) {
@@ -118,7 +117,13 @@ angular.module('badgerApp')
 
         // Swaps
         $scope.addSwap = function () {
-            $scope.userSwaps.$add($scope.newSwap);
+
+            var newSwapsSplit = $scope.newSwap.split(",");
+            for (var m in newSwapsSplit) {
+                if (newSwapsSplit[m].length > 0) {
+                    $scope.userSwaps.$add(newSwapsSplit[m]);
+                }
+            }
             $scope.newSwap = "";
         }
 
@@ -130,4 +135,13 @@ angular.module('badgerApp')
         $scope.clearSwaps = function () {
             $scope.userSwaps = [];
         };
+
+        // Anon Login
+        /*
+         $scope.AnonLogin = function () {
+         auth.login('anonymous', {
+         rememberMe: true
+         });
+         };
+         */
     });

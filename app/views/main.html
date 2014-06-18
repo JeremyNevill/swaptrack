@@ -1,9 +1,18 @@
 <div class="row">
     <div class="col-md-12">
 
+        <!--
         <button ng-click="AnonLogin()" class="btn btn-default btn-xs">Anon Login</button>
-        <button ng-click="FacebookLogin()" class="btn btn-default btn-xs">Facebook Login</button>
-        <button ng-click="Logout()" class="btn btn-default btn-xs">Logout</button>
+        -->
+        <div ng-hide="isLoggedIn">
+            <p>
+                <button ng-click="FacebookLogin()" class="btn btn-default btn-xs">Facebook Login</button>
+            </p>
+            <p>Login via Facebook to start swapping with your friends.</p>
+        </div>
+        <div ng-show="isLoggedIn">
+            <button ng-click="Logout()" class="btn btn-default btn-xs">Logout</button>
+        </div>
 
         <h2>{{ userDisplayName }}</h2>
         {{ userId }}
@@ -18,22 +27,24 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <p>Sticker Number:
-                    <input type="text" ng-model="newMissing"/>               
-                    <button type="submit" ng-click="addMissing()" class="btn">Add</button>
+                <p>Swap Nums:<br/>
+                    <textarea ng-model="newMissing" cols="30" rows="4"/><br/>
+                    <button type="submit" ng-click="addMissing()" class="btn btn-primary">Add</button>
                 </p>
-                 
-               
+
+
                 <p>
         <span ng-repeat="(id, missing) in userMissings">
-            <button type="button" class="btn btn-primary btn-xs">{{ missing }}</button>
+            <button type="button" class="btn btn-info btn-xs">{{ missing }}</button>
             <button ng-click="deleteMissing(id)" class="btn btn-default btn-xs">-</button>
             &nbsp;
         </span>
-               </p>
-               <p>
-                 <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
-               </p>                                          
+                </p>
+                <!--
+                <p>
+                   <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
+                </p>
+                -->
             </div>
         </div>
 
@@ -44,22 +55,24 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <p>Sticker Number:
-                    <input type="text" ng-model="newSwap"/>              
-                    <button type="submit" ng-click="addSwap()" class="btn">Add</button>
-                </p>                
+                <p>Swap num:<br/>
+                    <textarea ng-model="newSwap" cols="30" rows="4"/><br/>
+                    <button type="submit" ng-click="addSwap()" class="btn btn-primary">Add</button>
+                </p>
                 <p>
                 <span ng-repeat="(id, swap) in userSwaps">
-                   <button type="button" class="btn btn-primary btn-xs">{{ swap }}</button>
+                   <button type="button" class="btn btn-info btn-xs">{{ swap }}</button>
                    <button ng-click="deleteSwap(id)"
-                            class="btn btn-default btn-xs">-
+                           class="btn btn-default btn-xs">-
                    </button>
                   &nbsp;
                 </span>
                 </p>
-              <p>
-                    <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
+                <!--
+                <p>
+                      <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
                 </p>
+                -->
             </div>
         </div>
 
@@ -78,17 +91,16 @@
                 </p>
 
                 <p>
-                    <button ng-click="getOtherData()" class="btn">Get Other User</button>
+                    <button ng-click="getOtherData()" class="btn btn-primary">Get Friend</button>
                 </p>
 
                 <p>
-                    <button ng-click="matchSwaps()" class="btn">Match Swaps</button>
+                    <button ng-click="matchSwaps()" class="btn btn-primary">Match Swaps</button>
                 </p>
 
                 <p>
-                    Stickers:<br/>
                 <span ng-repeat="oswap in otherSwaps">
-                 <button type="button" class="btn btn-primary btn-xs">{{ oswap }}</button>
+                 <button type="button" class="btn btn-info btn-xs">{{ oswap }}</button>
 
                 &nbsp;
                 </span>
