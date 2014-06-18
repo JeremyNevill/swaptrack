@@ -75,7 +75,7 @@ angular.module('badgerApp')
         };
 
         // Missings
-        $scope.addMissing = function () {
+        $scope.addMissing = function () {                               
             $scope.userMissings.$add($scope.newMissing);
             $scope.newMissing = "";
             $scope.matchSwaps();
