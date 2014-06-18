@@ -73,17 +73,16 @@ angular.module('badgerApp')
             var newMissingsSplit = $scope.newMissing.split(",");
             for (var m in newMissingsSplit) {
                 if (newMissingsSplit[m].length > 0) {
-                    $scope.userMissings.$add(newMissingsSplit[m]);
+                    $scope.userMissings.$add(parseInt(newMissingsSplit[m],10));
                 }
             }
             $scope.newMissing = "";
-            //$scope.matchSwaps();
+            $scope.matchSwaps();
         }
 
         $scope.deleteMissing = function (id) {
             $scope.userMissings.$remove(id);
             $scope.matchSwaps();
-
         };
 
         $scope.clearMissings = function () {
@@ -104,14 +103,15 @@ angular.module('badgerApp')
 
             $scope.matches = [];
             $scope.userMissings.$getIndex().forEach(function (key, i) {
+                //console.log('Missing:' + $scope.userMissings[key]);
                 $scope.otherSwaps.$getIndex().forEach(function (swapKey, j) {
+                    //console.log('Other Swap:' + $scope.otherSwaps[swapKey]);
                     if ($scope.userMissings[key] === $scope.otherSwaps[swapKey]) {
                         var match = ($scope.otherSwaps[swapKey]);
                         $scope.matches.push(match);
                     }
                 });
             });
-
         };
 
 
@@ -121,7 +121,7 @@ angular.module('badgerApp')
             var newSwapsSplit = $scope.newSwap.split(",");
             for (var m in newSwapsSplit) {
                 if (newSwapsSplit[m].length > 0) {
-                    $scope.userSwaps.$add(newSwapsSplit[m]);
+                    $scope.userSwaps.$add(parseInt(newSwapsSplit[m],10));
                 }
             }
             $scope.newSwap = "";
