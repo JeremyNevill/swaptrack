@@ -60,9 +60,9 @@
                 </p>
                 -->
                 <p>
-                <span ng-repeat="swap in userSwaps">
+                <span ng-repeat="(id, swap) in userSwaps">
                <button type="button" class="btn btn-primary btn-xs">{{ swap }}</button>
-                    <button ng-click="deleteSwap($index)"
+                    <button ng-click="deleteSwap(id)"
                             class="btn btn-default btn-xs">-
                     </button>
                 &nbsp;

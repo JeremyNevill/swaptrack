@@ -119,7 +119,8 @@ angular.module('badgerApp')
         }
 
         $scope.deleteSwap = function (index) {
-            $scope.userSwaps.splice(index, 1);
+            $scope.userSwaps.$remove(index);
+            $scope.matchSwaps();
         };
 
         $scope.clearSwaps = function () {
