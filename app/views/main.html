@@ -19,24 +19,21 @@
             <div class="panel-body">
 
                 <p>Sticker Number:
-                    <input type="text" ng-model="newMissing"/>
+                    <input type="text" ng-model="newMissing"/>               
+                    <button type="submit" ng-click="addMissing()" class="btn">Add</button>
                 </p>
-
-                <p>
-                    <button type="submit" ng-click="addMissing()" class="btn">Add Missing Sticker</button>
-                </p>
-                <!--
-                <p>
-                    <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
-                </p>
-                -->
+                 
+               
                 <p>
         <span ng-repeat="(id, missing) in userMissings">
             <button type="button" class="btn btn-primary btn-xs">{{ missing }}</button>
             <button ng-click="deleteMissing(id)" class="btn btn-default btn-xs">-</button>
             &nbsp;
         </span>
-                </p>
+               </p>
+               <p>
+                 <button type="submit" ng-click="clearMissings()" class="btn">Clear</button>
+               </p>                                          
             </div>
         </div>
 
@@ -48,25 +45,20 @@
             <div class="panel-body">
 
                 <p>Sticker Number:
-                    <input type="text" ng-model="newSwap"/>
-                </p>
-
-                <p>
-                    <button type="submit" ng-click="addSwap()" class="btn">Add Swap Sticker</button>
-                </p>
-                <!--
-                <p>
-                    <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
-                </p>
-                -->
+                    <input type="text" ng-model="newSwap"/>              
+                    <button type="submit" ng-click="addSwap()" class="btn">Add</button>
+                </p>                
                 <p>
                 <span ng-repeat="(id, swap) in userSwaps">
-               <button type="button" class="btn btn-primary btn-xs">{{ swap }}</button>
-                    <button ng-click="deleteSwap(id)"
+                   <button type="button" class="btn btn-primary btn-xs">{{ swap }}</button>
+                   <button ng-click="deleteSwap(id)"
                             class="btn btn-default btn-xs">-
-                    </button>
-                &nbsp;
+                   </button>
+                  &nbsp;
                 </span>
+                </p>
+              <p>
+                    <button type="submit" ng-click="clearSwaps()" class="btn">Clear</button>
                 </p>
             </div>
         </div>

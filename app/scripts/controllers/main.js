@@ -6,6 +6,7 @@
  * @description
  * # MainCtrl
  * Controller of the badgerApp
+ * Copyright Jeremy Nevill (c) 2014
  */
 angular.module('badgerApp')
     .controller('MainCtrl', function ($scope, $firebase) {
@@ -54,12 +55,15 @@ angular.module('badgerApp')
 
 
         // Anon Login
+        /*
         $scope.AnonLogin = function () {
             auth.login('anonymous', {
                 rememberMe: true
-            });
+            }); 
         };
+        */
 
+      
         $scope.FacebookLogin = function () {
             auth.login('facebook', {
                 rememberMe: true

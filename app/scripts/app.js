@@ -7,6 +7,7 @@
  * # badgerApp
  *
  * Main module of the application.
+ * Copyright Jeremy Nevill (c) 2014
  */
 angular
   .module('badgerApp', [

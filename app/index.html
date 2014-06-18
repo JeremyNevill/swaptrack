@@ -2,8 +2,8 @@
 <html class="no-js">
 <head>
     <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
+    <title>SwapTrack - Realtime sticker swapping with your friends.</title>
+    <meta name="description" content="SwapTrack - Realtime sticker swapping with your friends.">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
@@ -15,6 +15,7 @@
     <!-- endbuild -->
 </head>
 <body ng-app="badgerApp">
+  
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -25,36 +26,26 @@
     <div class="header">
         <ul class="nav nav-pills pull-right">
             <li class="active"><a ng-href="#">Home</a></li>
-            <li><a ng-href="#/about">About</a></li>
-            <li><a ng-href="#">Contact</a></li>
+            <li><a ng-href="#/about">About</a></li>           
         </ul>
-        <h3 class="text-muted">Codename Badger</h3>
+      <h3 class="text-muted"><a href="/">SwapTrack</a> Realtime Swapping</h3>
     </div>
 
     <div ng-view=""></div>
 
     <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> Nevill.net</p>
+      <p>Copyright <a href="http://nevill.net">Jeremy Nevill (c) 2014</a></p>
     </div>
 </div>
 
-
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
+  ga('create', 'UA-642459-15', 'swaptrack.com');
+  ga('send', 'pageview');
 </script>
 
 <!--[if lt IE 9]>
