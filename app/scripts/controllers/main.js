@@ -108,7 +108,14 @@ angular.module('badgerApp')
                     //console.log('Other Swap:' + $scope.otherSwaps[swapKey]);
                     if ($scope.userMissings[key] === $scope.otherSwaps[swapKey]) {
                         var match = ($scope.otherSwaps[swapKey]);
-                        $scope.matches.push(match);
+                    
+                        // push into matches if not there already
+                        if( $scope.matches.indexOf(match)>-1){
+                            console.log("Already There");
+                        }else
+                         {
+                           $scope.matches.push(match);
+                         }                                            
                     }
                 });
             });
