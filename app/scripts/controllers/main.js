@@ -82,14 +82,11 @@ angular.module('badgerApp')
 
         $scope.deleteMissing = function (id) {
             $scope.userMissings.$remove(id);
-            $scope.matchSwaps();
         };
 
         $scope.clearMissings = function () {
-            $scope.userMissings = [];
-            $scope.matchSwaps();
+            $scope.userMissings.$remove();
         };
-
 
         /// Other Swaps - pull from other user's id
         $scope.getOtherData = function () {
@@ -100,22 +97,17 @@ angular.module('badgerApp')
 
         // Match swaps with other user
         $scope.matchSwaps = function () {
-
             $scope.matches = [];
             $scope.userMissings.$getIndex().forEach(function (key, i) {
-                //console.log('Missing:' + $scope.userMissings[key]);
-                $scope.otherSwaps.$getIndex().forEach(function (swapKey, j) {
-                    //console.log('Other Swap:' + $scope.otherSwaps[swapKey]);
+              $scope.otherSwaps.$getIndex().forEach(function (swapKey, j) {
                     if ($scope.userMissings[key] === $scope.otherSwaps[swapKey]) {
                         var match = ($scope.otherSwaps[swapKey]);
-                    
-                        // push into matches if not there already
                         if( $scope.matches.indexOf(match)>-1){
-                            console.log("Already There");
-                        }else
-                         {
+                        }
+                      else
+                      {
                            $scope.matches.push(match);
-                         }                                            
+                      }                                            
                     }
                 });
             });
@@ -140,7 +132,7 @@ angular.module('badgerApp')
         };
 
         $scope.clearSwaps = function () {
-            $scope.userSwaps = [];
+            $scope.userSwaps.$remove();
         };
 
         // Anon Login
