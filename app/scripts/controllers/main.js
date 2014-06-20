@@ -56,15 +56,15 @@ angular.module('badgerApp')
             }
         });
 
-        $scope.FacebookLogin = function () {
-            auth.login('facebook', {
+        $scope.AuthLogin = function (authType) {
+            auth.login(authType, {
                 rememberMe: true
             });
         };
 
-        $scope.Logout = function () {
+      $scope.Logout = function () {
             auth.logout();
-            $scope.userId = '';
+            $scope.isLoggedIn=false;
         };
 
 

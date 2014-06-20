@@ -29,6 +29,10 @@ angular
         templateUrl: 'views/csv.html',
         controller: 'MainCtrl'
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
